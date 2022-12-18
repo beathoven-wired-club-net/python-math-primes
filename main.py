@@ -1,15 +1,16 @@
 from math import sqrt
 
-known_primes = [2, 3, 5]
+known_primes = [2, 3, 5, 7]
 
 
 def main():
-    number = input_number()
-    check_number(number, sqrt(number))
+    while True:
+        number = input_number()
+        check_number(number)
 
 
 def input_number():
-    print("Input number: ")
+    print("Input number: ", end="")
     while True:
         try:
             return int(input())
@@ -17,54 +18,72 @@ def input_number():
             print("That was not a valid number.")
 
 
-def check_number(number, sqrt_number):
-    if is_prime(number, sqrt_number):
-        print(str(number) + " is prime.")
+def check_number(number):
+    if is_prime(number, sqrt(number)):
+        print(str(number) + " is a prime.")
     else:
-        print(str(number) + " is not prime.")
+        print(str(number) + " is not a prime.")
 
 
-def print_known_primes():
-    i = 0
-    for prime_number in known_primes:
-        print('{:10d}'.format(prime_number), end='')
-        if i % 8 == 7:
-            print()
-        i += 1
-    print()
-
-
-def is_prime(n, sqrt_n):
-    if n < 2:
+@profile
+def is_prime(number, sqrt_number):
+    if number < 2:
         return False
 
-    if sqrt_n >= known_primes[-1] + 2:
+    if sqrt_number >= known_primes[-1] + 2:
         print("Extending list of known primes.")
-        extend_known_primes(int(sqrt_n))
-        print_known_primes()
+        extend_known_primes(int(sqrt_number))
+        # print_known_primes()
 
-    for p in known_primes:
-        if p > sqrt_n:
+    for prime in known_primes:
+        if prime > sqrt_number:
             break
 
-        if n % p == 0:
+        if number % prime == 0:
             return False
 
     return True
 
 
-def extend_known_primes(max_n):
+def extend_known_primes(max_number):
     offsets = [6, 4, 2, 4, 2, 4, 6, 2]
 
-    # n = known_primes[-1] // 30 * 30 + 1
-    n = 1
-    i = 0
-    while known_primes[-1] <= max_n:
-        n = n + offsets[i]
-        i = (i + 1) % 8
+    number = known_primes[-1]
+    if number == 5:
+        index = 0
+    else:
+        index = find_index(number, offsets)
 
-        if is_prime(n, sqrt(n)):
-            known_primes.append(n)
+    while known_primes[-1] <= max_number:
+        number = number + offsets[index % 8]
+        index += 1
+
+        if is_prime(number, sqrt(number)):
+            known_primes.append(number)
+            # print('{:10d}'.format(number), end='')
+
+    # print()
+
+
+def find_index(number, offsets):
+    index = 0
+
+    remainder = number % 30
+    while remainder > 1:
+        remainder -= offsets[index]
+        index += 1
+
+    return index
+
+
+def print_known_primes():
+    i = 0
+    for number in known_primes:
+        print('{:10d}'.format(number), end='')
+        if i % 8 == 7:
+            print()
+        i += 1
+    print()
 
 
 main()
