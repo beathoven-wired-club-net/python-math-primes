@@ -7,6 +7,8 @@ This project is my collection of prime number algorithms.
 | The calculation with 10 digits takes less then 1 second.
 | With 13 digits it is 16 seconds already.
 
+Test 1
+-------------------
 | Input number: 1.000.000.001 (1 billion and 1)
 | Extending list of known primes.
 | 1000000001 is not a prime.
@@ -40,7 +42,8 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     45      3398       1279.0      0.4      0.6      return True
 ====== ========= ============ ======== ========= ==================================================================
 
-
+Test 2
+-------------------
 | Input number: 1.000.000.000.001 (1 trillion and 1)
 | Extending list of known primes.
 | 1000000000001 is not a prime.
@@ -74,7 +77,8 @@ Line #      Hits         Time  Per Hit   % Time  Line Contents
     45     78495      31149.0      0.4      0.2      return True
 ====== ========= ============ ======== ========= ==================================================================
 
-
+Test 3
+-------------------
 | Input number: 1.000.000.000.001 (1 trillion and 1)
 | Extending list of known primes.
 | 1000000000001 is not a prime.
